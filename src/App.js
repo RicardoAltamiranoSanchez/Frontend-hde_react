@@ -23,3 +23,7 @@ function App() {
 }
 
 export default App;
+//Creamos una app react cvon este comando npx create-react-app hde
+//debemos tener node
+//en el index importamos esqueletor y normalize para el diseño de la pagina
+//https://cdnjs.com/libraries/normalize
