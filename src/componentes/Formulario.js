@@ -1,12 +1,32 @@
 
 import React,{useState,Fragment} from 'react';
+import {calcular}from '../helpers';
+
 // es useState  te retorna dos valores la primera es una variable  y el segundo valor es una funcion 
 //Segunda forma para hacer componentes
 //En react los eventos empiezan con un on al inicio
-const Formulario = ({cantidad,guardarCantidad,plazo,guardarPlazo}) => {
-//Fragment es para poder encapsular el formulario y poder enviar solo un cosa ya en react solo se puede enviar un solo componente
-   
-        
+const Formulario = (props) => {
+   const {cantidad,guardarCantidad,plazo,guardarPlazo,totalPagar,totalPagarF} = props;
+//se utilizo state para hacer el evento de onSubmit lo iniciamos en false 
+const [error,guardarError]=useState(false);
+//funcion para el evento de de onSubmit 
+const leerFormulario=(e)=>{
+    e.preventDefault();
+
+    if(cantidad <= 0|| plazo === "")
+    
+    {
+        console.log(e.target.value)
+        guardarError(true);
+        return;
+    }
+
+    guardarError(false);
+    const total=calcular(cantidad,plazo);
+    totalPagarF(total);
+
+}
+//Fragment es para poder encapsular el formulario y poder enviar solo un cosa ya en react solo se puede enviar un solo componente       
 //se puede usar una funcion hacer la ejecucion de la funcion o directamente en el onchange  y guardarCantidad(parseInt(e.target.value))        
 //Es una funcion en useState primero se indica la varible depues la funcion seria un callback 
 // const leerCantidad= (e) => {
@@ -17,10 +37,10 @@ return (
         //Seria como las macro en python separamos codigo para utilizarlo individualmente o reutilizarlo
         //onChange es un evente en reacto se manejo en eventos
         //Esta escuchando lo que suceda en el input
-        
+         //onSubmit es un metodo de react de eventeos de agregamos una funcion para el evento de submit  
         <Fragment> 
-              
-        <form>
+           
+        <form onSubmit={leerFormulario}>
         {cantidad}{plazo}
         
 
@@ -59,9 +79,10 @@ return (
               </div>
           </div>
          </form>
+        {(error) ?<p className="error">Error debe introducir todos los campos</p> : null} 
+     
          </Fragment> 
          )
-
-       }
+        }
  
 export default Formulario;

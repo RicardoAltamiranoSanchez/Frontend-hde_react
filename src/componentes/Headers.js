@@ -7,9 +7,7 @@ import React,{ Fragment } from 'react';
 //este de la primera forma de crear un componente de
 function Headers({nombre,prueba}) {
     console.log(nombre);
-    
-
-
+       
  //este tipo de retorno es exclusivo de react
     return(
         <Fragment>  

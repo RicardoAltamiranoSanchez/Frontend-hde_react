@@ -1,14 +1,27 @@
 //Asi importamos desde react con import y un string 
+
 import Headers from './componentes/Headers';
 import Formulario from './componentes/Formulario';
-
+import Mensaje from './componentes/Mensaje';
+import Resultado from './componentes/Resultado';
 //importamos react y fragment que es para utilizar como un div para como un contenido 
 //ya que solo podemos retonar un valor y no vario en el return de react
+
 import React,{ Fragment ,useState} from 'react';
+let componentes;
 function App() {
-  
   const [cantidad,guardarCantidad]=useState(0);  
-  const [plazo,guardarPlazo]=useState(0);
+  const [plazo,guardarPlazo]=useState("");
+  const[totalPagar,totalPagarF]=useState(0);
+  
+  if(totalPagar ===0){
+    componentes=<Mensaje/>;
+    
+  }else{
+    componentes=<Resultado/>
+
+  }
+
   return (
     //para utiliza el componente es con esa sintaxis < Headers/> como si fuera un xml se puede reutilizar el codigo
     <Fragment>
@@ -18,7 +31,6 @@ function App() {
        nombre='HDE'
        prueba={cantidad}
        />
-       
        <div className="contendio">
 
                 <Formulario
@@ -26,8 +38,15 @@ function App() {
                   guardarCantidad={guardarCantidad}
                   plazo={plazo}
                   guardarPlazo={guardarPlazo}
+                  totalPagar={totalPagar}
+                  totalPagarF={totalPagarF}
+                  componentes={componentes}
                 />         
 
+       </div>
+       <div className="mensajes">
+
+         {componentes}
        </div>
        </Fragment>
 
